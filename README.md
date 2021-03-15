@@ -24,16 +24,14 @@ digraph {
   a3 -> b3;
   b3 -> z;
 }
-$ dot-closure a1 a2 < input.dot
+$ dot-closure a1 b2 < input.dot
 digraph {
   a1;
   b1;
-  a2;
   b2;
   z;
   a1 -> b1;
   b1 -> z;
-  a2 -> b2;
   b2 -> z;
 }
 ```

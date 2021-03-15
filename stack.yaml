@@ -3,4 +3,5 @@ packages:
 - dot-closure
 - dot-graph
 - dot-transitive
-extra-deps: []
+extra-deps:
+- language-dot-0.1.1
