@@ -1,0 +1,12 @@
+name:                dot-closure
+version:             0.1.0.0
+#synopsis:
+#description:
+
+dependencies:
+  - base >= 4.7 && < 5
+
+executables:
+  dot-transitive:
+    source-dirs:      src
+    main:             Main.hs

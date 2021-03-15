@@ -1,20 +1,57 @@
-# dot-transitive
+# dot-utils
+
+A set of small command-line tools for transforming GraphViz dot-files.
+
+
+## dot-closure
+
+Keep the sub-graph which is accessible from a given set of nodes.
+
+```
+$ cat input.dot
+digraph {
+  a1;
+  b1;
+  a2;
+  b2;
+  a3;
+  b3;
+  z;
+  a1 -> b1;
+  b1 -> z;
+  a2 -> b2;
+  b2 -> z;
+  a3 -> b3;
+  b3 -> z;
+}
+$ dot-closure a1 a2 < input.dot
+digraph {
+  a1;
+  b1;
+  a2;
+  b2;
+  z;
+  a1 -> b1;
+  b1 -> z;
+  a2 -> b2;
+  b2 -> z;
+}
+```
+
+
+## dot-transitive
 
 Remove edges which are implied by the transitive closure of the existing edges.
 
-## example input
-
 ```
+$ cat input.dot
 strict digraph {
+  a -> a;
   a -> b;
   a -> c;
   b -> c;
 }
-```
-
-## example output
-
-```
+$ dot-transitive < input.dot
 strict digraph {
   a -> b;
   b -> c;
