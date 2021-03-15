@@ -1,5 +1,6 @@
 resolver: lts-16.26
 packages:
 - dot-closure
+- dot-graph
 - dot-transitive
 extra-deps: []

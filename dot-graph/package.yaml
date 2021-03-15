@@ -1,0 +1,14 @@
+name:                dot-graph
+version:             0.1.0.0
+#synopsis:
+#description:
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - doctest
+  - graph-wrapper
+  - language-dot
+
+library:
+  source-dirs:      src
