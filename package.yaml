@@ -1,0 +1,14 @@
+name:                dot-transitive
+version:             0.1.0.0
+#synopsis:
+#description:
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+
+executables:
+  dot-transitive:
+    source-dirs:      src
+    main:             Main.hs
