@@ -5,6 +5,11 @@ version:             0.1.0.0
 
 dependencies:
   - base >= 4.7 && < 5
+  - containers
+  - doctest
+  - dot-graph
+  - graph-wrapper
+  - language-dot
 
 executables:
   dot-transitive:
