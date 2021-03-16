@@ -2,7 +2,6 @@
 module Main where
 
 import Test.DocTest
-import Data.Containers.ListUtils (nubOrd)
 import qualified Data.Graph.Wrapper as Graph
 import qualified Language.Dot as Dot
 

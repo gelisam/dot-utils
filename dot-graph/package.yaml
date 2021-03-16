@@ -12,3 +12,4 @@ dependencies:
 
 library:
   source-dirs:      src
+  options:          -W -Wall
