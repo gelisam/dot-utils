@@ -22,20 +22,20 @@ test = doctest ["dot-reverse/src/Main.hs"]
 
 reverseStmt :: Dot.Statement -> Dot.Statement
 reverseStmt = \case
-  Dot.EdgeStatement entities x
-    -> Dot.EdgeStatement (reverse entities) x
+  Dot.EdgeStatement [Dot.ENodeId Dot.NoEdge node1, Dot.ENodeId Dot.DirectedEdge node2] x
+    -> Dot.EdgeStatement [Dot.ENodeId Dot.NoEdge node2, Dot.ENodeId Dot.DirectedEdge node1] x
   x -> x
 
 
 -- |
 -- >>> mapM_ print $ reverseStmts inputStmts
--- EdgeStatement [ENodeId DirectedEdge (NodeId (NameId "b") Nothing),ENodeId NoEdge (NodeId (NameId "a") Nothing)] []
--- EdgeStatement [ENodeId DirectedEdge (NodeId (NameId "c") Nothing),ENodeId NoEdge (NodeId (NameId "b") Nothing)] []
+-- EdgeStatement [ENodeId NoEdge (NodeId (NameId "b") Nothing),ENodeId DirectedEdge (NodeId (NameId "a") Nothing)] []
+-- EdgeStatement [ENodeId NoEdge (NodeId (NameId "c") Nothing),ENodeId DirectedEdge (NodeId (NameId "b") Nothing)] []
 reverseStmts :: [Dot.Statement] -> [Dot.Statement]
 reverseStmts = fmap reverseStmt
 
 -- |
--- >> putStr $ renderDot $ simplifyGraph ["a1", "b2"] inputGraph
+-- >> putStr $ renderDot $ reverseGraph ["a1", "b2"] inputGraph
 -- strict digraph {
 --   b -> a;
 --   c -> b;
