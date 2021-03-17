@@ -1,7 +1,8 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE DeriveGeneric, LambdaCase, OverloadedStrings, RecordWildCards, ViewPatterns #-}
 module Main where
 
 import Data.Set (Set)
+import Options.Generic
 import Test.DocTest
 import System.Environment
 import qualified Data.Graph.Wrapper as Graph
@@ -15,7 +16,6 @@ import Dot.Graph hiding (test, testInput)
 -- >>> let subset = Set.fromList ["a1", "b1", "b2", "z"]
 -- >>> let Right inputGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
 -- >>> let g = graphFromGraph inputGraph
-
 
 testInput :: String
 testInput = unlines
@@ -137,9 +137,17 @@ graphClosure roots dotGraph
     subset :: Set Vertex
     subset = reachableFromRoots roots g
 
+
+data Options = Options
+  { roots :: String
+  }
+  deriving (Generic, Show)
+
+instance ParseRecord Options
+
 main :: IO ()
 main = do
-  roots <- getArgs
+  Options {roots = words -> roots} <- getRecord "dot-closure"
   inputString <- getContents
   case Dot.parseDot "stdin" inputString of
     Left err -> do

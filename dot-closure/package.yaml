@@ -10,6 +10,7 @@ dependencies:
   - dot-graph
   - graph-wrapper
   - language-dot
+  - optparse-generic
 
 executables:
   dot-closure:
