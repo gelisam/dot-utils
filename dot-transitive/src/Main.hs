@@ -50,10 +50,10 @@ simplifyStmts stmts
     g = graphFromStatements stmts
 
 -- |
--- >> putStr $ renderDot $ simplifyGraph ["a1", "b2"] inputGraph
+-- >>> putStr $ Dot.renderDot $ simplifyGraph inputGraph
 -- strict digraph {
---   a -> b;
---   b -> c;
+--   a -> b
+--   b -> c
 -- }
 simplifyGraph :: Dot.Graph -> Dot.Graph
 simplifyGraph (Dot.Graph x y z stmts)

@@ -35,10 +35,10 @@ reverseStmts :: [Dot.Statement] -> [Dot.Statement]
 reverseStmts = fmap reverseStmt
 
 -- |
--- >> putStr $ renderDot $ reverseGraph ["a1", "b2"] inputGraph
+-- >>> putStr $ Dot.renderDot $ reverseGraph inputGraph
 -- strict digraph {
---   b -> a;
---   c -> b;
+--   b -> a
+--   c -> b
 -- }
 reverseGraph :: Dot.Graph -> Dot.Graph
 reverseGraph (Dot.Graph x y z stmts)
