@@ -1,10 +1,10 @@
 {-# LANGUAGE DeriveGeneric, LambdaCase, OverloadedStrings, ViewPatterns #-}
+{-# OPTIONS -Wno-name-shadowing #-}
 module Main where
 
 import Data.Set (Set)
 import Options.Generic
 import Test.DocTest
-import System.Environment
 import qualified Data.Graph.Wrapper as Graph
 import qualified Data.Set as Set
 import qualified Language.Dot as Dot

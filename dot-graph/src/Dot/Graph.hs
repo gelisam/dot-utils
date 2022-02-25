@@ -34,6 +34,10 @@ vertexFromNodeId = \case
     -> s
   Dot.NodeId (Dot.IntegerId n) _
     -> show n
+  Dot.NodeId (Dot.FloatId x) _
+    -> show x
+  Dot.NodeId (Dot.XmlId x) _
+    -> show x
 
 verticesFromEntity :: Dot.Entity -> [Vertex]
 verticesFromEntity = \case
