@@ -12,4 +12,4 @@ dependencies:
 
 library:
   source-dirs:      src
-  options:          -W -Wall
+  ghc-options:      -W -Wall

@@ -16,4 +16,4 @@ executables:
   dot-closure:
     source-dirs:      src
     main:             Main.hs
-    options:          -W -Wall
+    ghc-options:      -W -Wall
