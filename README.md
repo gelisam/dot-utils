@@ -37,6 +37,22 @@ digraph {
 ```
 
 
+## dot-reverse
+
+Flip all the edges.
+
+```
+$ cat input.dot
+strict digraph {
+  a -> b;
+  b -> c;
+}
+$ dot-reverse < input.dot
+strict digraph {
+  b -> a
+  c -> b
+}
+```
 ## dot-transitive
 
 Remove edges which are implied by the transitive closure of the existing edges.
