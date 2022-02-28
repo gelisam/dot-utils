@@ -53,6 +53,44 @@ strict digraph {
   c -> b
 }
 ```
+
+## dot-subset
+
+Restrict a graph to the nodes you're interested in, collapsing indirect paths to
+direct paths.
+
+```
+$ cat input.dot
+digraph {
+  x0
+  x1
+  x2
+  x3
+  x4
+  x5
+  a
+  b
+  c
+  x0 -> a
+  a -> x1
+  a -> x2
+  x1 -> b
+  x2 -> b
+  b -> x3
+  x3 -> x4
+  x4 -> c
+  c -> x5
+}
+$ dot-subset --subset="a b c" < input.dot
+digraph {
+  a
+  b
+  c
+  a -> b
+  b -> c
+}
+```
+
 ## dot-transitive
 
 Remove edges which are implied by the transitive closure of the existing edges.

@@ -3,6 +3,7 @@ packages:
 - dot-closure
 - dot-graph
 - dot-reverse
+- dot-subset
 - dot-transitive
 extra-deps:
 - language-dot-0.1.1

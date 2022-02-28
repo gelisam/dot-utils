@@ -1,0 +1,19 @@
+name:                dot-subset
+version:             0.1.0.0
+#synopsis:
+#description:
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - doctest
+  - dot-graph
+  - graph-wrapper
+  - language-dot
+  - optparse-generic
+
+executables:
+  dot-subset:
+    source-dirs:      src
+    main:             Main.hs
+    ghc-options:      -W -Wall
