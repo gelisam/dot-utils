@@ -7,7 +7,7 @@ import qualified Data.Graph.Wrapper as Graph
 import qualified Language.Dot as Dot
 
 -- $setup
--- >>> let Right inputGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
+-- >>> let Right inputDotGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
 
 
 testInput :: String
@@ -39,6 +39,10 @@ vertexFromNodeId = \case
   Dot.NodeId (Dot.XmlId x) _
     -> show x
 
+nodeIdFromVertex :: Vertex -> Dot.NodeId
+nodeIdFromVertex v
+  = Dot.NodeId (Dot.StringId v) Nothing
+
 verticesFromEntity :: Dot.Entity -> [Vertex]
 verticesFromEntity = \case
   Dot.ENodeId _ nodeId
@@ -53,6 +57,10 @@ verticesFromStatement = \case
     -> concatMap verticesFromEntity entities
   _ -> []
 
+statementFromVertex :: Vertex -> Dot.Statement
+statementFromVertex v
+  = Dot.NodeStatement (nodeIdFromVertex v) []
+
 -- |
 -- >>> mapM_ print $ verticesFromStatements inputStmts
 -- "a"
@@ -62,6 +70,14 @@ verticesFromStatements :: [Dot.Statement] -> [Vertex]
 verticesFromStatements = nubOrd . concatMap verticesFromStatement
 
 -- |
+-- >>> mapM_ print $ statementsFromVertices ["a", "b", "c"]
+-- NodeStatement (NodeId (StringId "a") Nothing) []
+-- NodeStatement (NodeId (StringId "b") Nothing) []
+-- NodeStatement (NodeId (StringId "c") Nothing) []
+statementsFromVertices :: [Vertex] -> [Dot.Statement]
+statementsFromVertices = map statementFromVertex
+
+-- |
 -- >>> mapM_ print $ edgesFromStatements inputStmts
 -- ("a","b")
 -- ("b","c")
@@ -69,6 +85,15 @@ edgesFromStatements :: [Dot.Statement] -> [Edge]
 edgesFromStatements stmts
   = [ (vertexFromNodeId from, vertexFromNodeId to)
     | Dot.EdgeStatement [Dot.ENodeId _ from, Dot.ENodeId _ to] _ <- stmts
+    ]
+
+statementsFromEdges :: [Edge] -> [Dot.Statement]
+statementsFromEdges edges
+  = [ Dot.EdgeStatement
+        [ Dot.ENodeId Dot.NoEdge       (nodeIdFromVertex from)
+        , Dot.ENodeId Dot.DirectedEdge (nodeIdFromVertex to)
+        ] []
+    | (from, to) <- edges
     ]
 
 -- |
@@ -84,8 +109,25 @@ graphFromStatements stmts
     edges = edgesFromStatements stmts
 
 -- |
--- >>> graphFromGraph inputGraph
+-- >>> graphFromDotGraph inputDotGraph
 -- fromVerticesEdges [("a","a"),("b","b"),("c","c")] [("a","b"),("b","c")]
-graphFromGraph :: Dot.Graph -> Graph
-graphFromGraph (Dot.Graph _ _ _ stmts)
+graphFromDotGraph :: Dot.Graph -> Graph
+graphFromDotGraph (Dot.Graph _ _ _ stmts)
   = graphFromStatements stmts
+
+-- |
+-- >>> putStr $ Dot.renderDot $ dotGraphFromGraph $ graphFromDotGraph inputDotGraph
+-- digraph {
+--   "a"
+--   "b"
+--   "c"
+--   "a" -> "b"
+--   "b" -> "c"
+-- }
+dotGraphFromGraph :: Graph -> Dot.Graph
+dotGraphFromGraph g
+  = Dot.Graph Dot.UnstrictGraph Dot.DirectedGraph Nothing stmts
+  where
+    stmts
+      = statementsFromVertices (Graph.vertices g)
+     ++ statementsFromEdges (Graph.edges g)

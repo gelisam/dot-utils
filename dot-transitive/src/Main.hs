@@ -8,8 +8,8 @@ import qualified Language.Dot as Dot
 import Dot.Graph hiding (test, testInput)
 
 -- $setup
--- >>> let Right inputGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
--- >>> let g = graphFromGraph inputGraph
+-- >>> let Right inputDotGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
+-- >>> let g = graphFromDotGraph inputDotGraph
 
 
 testInput :: String
@@ -50,7 +50,7 @@ simplifyStmts stmts
     g = graphFromStatements stmts
 
 -- |
--- >>> putStr $ Dot.renderDot $ simplifyGraph inputGraph
+-- >>> putStr $ Dot.renderDot $ simplifyGraph inputDotGraph
 -- strict digraph {
 --   a -> b
 --   b -> c

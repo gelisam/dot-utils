@@ -15,7 +15,7 @@ import Dot.Graph hiding (test, testInput)
 -- >>> let roots = ["a1", "b2"]
 -- >>> let subset = Set.fromList ["a1", "b1", "b2", "y", "z"]
 -- >>> let Right inputGraph@(Dot.Graph _ _ _ inputStmts) = Dot.parseDot "testInput" testInput
--- >>> let g = graphFromGraph inputGraph
+-- >>> let g = graphFromDotGraph inputGraph
 
 testInput :: String
 testInput = unlines
@@ -187,7 +187,7 @@ graphClosure roots depth dotGraph
   = graphSubset subset dotGraph
   where
     g :: Graph
-    g = graphFromGraph dotGraph
+    g = graphFromDotGraph dotGraph
 
     subset :: Set Vertex
     subset = reachableFromRoots roots depth g
