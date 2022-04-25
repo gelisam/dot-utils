@@ -42,9 +42,6 @@ test :: IO ()
 test = doctest ["dot-subset/src/Dot/Subset.hs"]
 
 
-toDotGraph :: Graph -> Dot.Graph
-toDotGraph = undefined
-
 graphSubset :: [String] -> Graph -> Graph
 graphSubset subset g
   = Graph.fromListSimple
