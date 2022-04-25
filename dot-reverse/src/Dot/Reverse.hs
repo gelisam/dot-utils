@@ -1,5 +1,5 @@
 {-# LANGUAGE LambdaCase #-}
-module Main where
+module Dot.Reverse where
 
 import Test.DocTest
 import qualified Language.Dot as Dot
@@ -17,7 +17,7 @@ testInput = unlines
   ]
 
 test :: IO ()
-test = doctest ["dot-reverse/src/Main.hs"]
+test = doctest ["dot-reverse/src/Dot/Reverse.hs"]
 
 
 reverseStmt :: Dot.Statement -> Dot.Statement

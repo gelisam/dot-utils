@@ -1,5 +1,5 @@
 {-# LANGUAGE LambdaCase, ViewPatterns #-}
-module Main where
+module Dot.Transitive where
 
 import Test.DocTest
 import qualified Data.Graph.Wrapper as Graph
@@ -23,7 +23,7 @@ testInput = unlines
   ]
 
 test :: IO ()
-test = doctest ["dot-transitive/src/Main.hs"]
+test = doctest ["dot-transitive/src/Dot/Transitive.hs"]
 
 
 isRedundantEdgeStatement :: Graph -> Dot.Statement -> Bool

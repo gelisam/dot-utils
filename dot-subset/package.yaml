@@ -12,8 +12,13 @@ dependencies:
   - language-dot
   - optparse-generic
 
+ghc-options:      -W -Wall
+
+library:
+  source-dirs:      src
+
 executables:
   dot-subset:
-    source-dirs:      src
+    source-dirs:      app
     main:             Main.hs
-    ghc-options:      -W -Wall
+    dependencies:     dot-subset

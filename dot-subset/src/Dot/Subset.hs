@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveGeneric, LambdaCase, OverloadedStrings, ViewPatterns #-}
 {-# OPTIONS -Wno-name-shadowing #-}
-module Main where
+module Dot.Subset where
 
 import Options.Generic
 import Test.DocTest
@@ -39,7 +39,7 @@ testInput = unlines
   ]
 
 test :: IO ()
-test = doctest ["dot-subset/src/Main.hs"]
+test = doctest ["dot-subset/src/Dot/Subset.hs"]
 
 
 toDotGraph :: Graph -> Dot.Graph

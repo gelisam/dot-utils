@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveGeneric, LambdaCase, OverloadedStrings, ViewPatterns #-}
 {-# OPTIONS -Wno-name-shadowing #-}
-module Main where
+module Dot.Closure where
 
 import Data.Set (Set)
 import Options.Generic
@@ -38,7 +38,7 @@ testInput = unlines
   ]
 
 test :: IO ()
-test = doctest ["dot-closure/src/Main.hs"]
+test = doctest ["dot-closure/src/Dot/Closure.hs"]
 
 
 isNodeIdAbout :: Set Vertex -> Dot.NodeId -> Bool
