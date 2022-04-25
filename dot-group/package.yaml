@@ -1,0 +1,26 @@
+name:                dot-group
+version:             0.1.0.0
+#synopsis:
+#description:
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - doctest
+  - dot-graph
+  - dot-subset
+  - extra
+  - graph-wrapper
+  - language-dot
+  - optparse-generic
+
+ghc-options:      -W -Wall
+
+library:
+  source-dirs:      src
+
+executables:
+  dot-group:
+    source-dirs:      app
+    main:             Main.hs
+    dependencies:     dot-group

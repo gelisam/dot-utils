@@ -37,6 +37,48 @@ digraph {
 ```
 
 
+## dot-group
+
+The first node of each group is the "leader". Remove all non-leaders from each
+group and move all the arrows pointing into or out of the group so that they
+point into or out of the leader instead.
+
+```
+$ cat groups.txt
+[1]
+a1
+b1
+c1
+
+[2]
+a2
+b2
+c2
+$ cat input.dot
+strict digraph {
+  a1;
+  a2;
+  b1;
+  b2;
+  c1;
+  c2;
+  d;
+
+  a1 -> a2;
+  b1 -> c2;
+  b2 -> d;
+}
+$ dot-group --groupFile=groups.txt < input.dot
+digraph {
+  "[1]"
+  "[2]"
+  "d"
+  "[1]" -> "[2]"
+  "[2]" -> "d"
+}
+```
+
+
 ## dot-reverse
 
 Flip all the edges.
