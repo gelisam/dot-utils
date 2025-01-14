@@ -96,6 +96,39 @@ strict digraph {
 }
 ```
 
+## dot-sinkify
+
+Delete the outgoing edges from a few nodes, thus turning them into sinks.
+Especially useful when combined with dot-closure, to find all the nodes which
+can be reached by paths which do _not_ go through these
+nodes-converted-into-sinks.
+
+```
+$ cat example.dot
+strict digraph {
+  source -> x;
+  source -> y;
+  x -> blocker;
+  blocker -> z;
+  blocker -> unreachable;
+  y -> z;
+}
+$ cat example.dot | dot-sinkify --targets=blocker
+strict digraph {
+  source -> x
+  source -> y
+  x -> blocker
+  y -> z
+}
+$ cat example.dot | dot-sinkify --targets=blocker | dot-closure --roots=source
+strict digraph {
+  source -> x
+  source -> y
+  x -> blocker
+  y -> z
+}
+```
+
 ## dot-subset
 
 Restrict a graph to the nodes you're interested in, collapsing indirect paths to
